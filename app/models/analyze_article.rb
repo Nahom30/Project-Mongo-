@@ -9,6 +9,8 @@ class AnalyzeArticle
 		trump_counter = 0
 		hillary_counter = 0
 		bernie_counter = 0
+		ted_counter = 0
+		kasich_counter = 0
 
 		File.open(Rails.root + "db/article.txt", "r").each_line do |line|
 			line.split(" ").each do |word|
@@ -19,6 +21,11 @@ class AnalyzeArticle
 					hillary_counter += 1
 				elsif word == "bernie" || word == "sanders"
 					bernie_counter += 1
+				elsif word == "cruz" || word == "ted"
+					ted_counter += 1
+				elsif word == "kasich" 
+					kasich_counter += 1
+
 				end
 			end
 		end
@@ -26,6 +33,8 @@ class AnalyzeArticle
 		Rails.logger.info "Found this number of trumps: #{trump_counter}"
 		Rails.logger.info "Found this number of hillary: #{hillary_counter}"
 		Rails.logger.info "Found this number of bernie: #{bernie_counter}"
+		Rails.logger.info "Found this number of ted: #{ted_counter}"
+		Rails.logger.info "Found this number of kasich: #{kasich_counter}"
 	end
 
 	# To remove any punctuations from a word
@@ -37,3 +46,5 @@ class AnalyzeArticle
 		word.downcase!
 	end
 end
+
+
