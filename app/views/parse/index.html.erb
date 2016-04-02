@@ -1,1 +1,72 @@
-hi
+
+<!DOCTYPE html>
+<html>
+<head><title>President Candidates</title></head>
+<div align="center"><%= button_to 'Analayze', parser_path, method: :post %></div>
+<body>
+<div>
+<table border="1">
+<thead>
+<tr>
+<td colspan="2"><span style="font-weight:bold">President Candidates</span></td>
+</tr>
+</thead>
+<tr>
+<th>Name</th>
+<th>Mentions</th>
+</tr>
+<%      trump_counter = 0
+		hillary_counter = 0
+		bernie_counter = 0
+		ted_counter = 0
+		kasich_counter = 0
+
+		def clean_up_word(word)
+			word.strip!
+			word.chomp!(".")
+			word.chomp!(",")
+			word.chomp!("\"")	
+			word.downcase!
+		end
+
+File.open(Rails.root + "db/article.txt", "r").each_line do |line|
+			line.split(" ").each do |word|
+				clean_up_word(word)
+				if word == "trump" || word == "donald"
+					trump_counter += 1
+				elsif word == "clinton" || word == "hillary"
+					hillary_counter += 1
+				elsif word == "bernie" || word == "sanders"
+					bernie_counter += 1
+				elsif word == "cruz" || word == "ted"
+					ted_counter += 1
+				elsif word == "kasich" 
+					kasich_counter += 1
+
+				end
+			end
+		end %>
+<tr>
+<td>Hillary Clinton</td>
+<td><%= hillary_counter %></td>
+</tr>
+<tr>
+<td>Donald Trump</td>
+<td><%= trump_counter %></td>
+</tr>
+<tr>
+<td>Bernie Sanders</td>
+<td><%= bernie_counter %></td>
+</tr>
+<tr>
+<td>Ted Cruz</td>
+<td><%= ted_counter %></td>
+</tr>
+<tr>
+<td>Johnk Kasich</td>
+<td><%= ted_counter %></td>
+</tr>
+</table>
+</div>
+</body>
+</html>
