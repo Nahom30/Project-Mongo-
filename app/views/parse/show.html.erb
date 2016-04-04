@@ -1,0 +1,21 @@
+<table border="1">
+<thead>
+<tr>
+<td colspan="2"><span style="font-weight:bold">President Candidates</span></td>
+</tr>
+</thead>
+<tr>
+<th>Name</th>
+<th>Mentions</th>
+</tr>
+
+<% @results.each do |candidate,popularity| %>
+<tr>
+<td><%=candidate%></td>
+<td><%=popularity%></td>
+</tr>
+<% end %>
+
+</table>
+
+<%= link_to "Home", parser_path %>

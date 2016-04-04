@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :documents
   get 'parser' => 'parse#index'
+  get 'parser/show' => 'parse#show', as: 'parse'
   post'parser' => 'parse#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -12,6 +12,8 @@ class AnalyzeArticle
 		ted_counter = 0
 		kasich_counter = 0
 
+
+
 		File.open(Rails.root + "db/article.txt", "r").each_line do |line|
 			line.split(" ").each do |word|
 				clean_up_word(word)
@@ -30,11 +32,25 @@ class AnalyzeArticle
 			end
 		end
 
+		results = {
+			"hillary" => hillary_counter,
+			"bernie" => bernie_counter,
+			"kasich" => kasich_counter,
+			"ted" => ted_counter,
+			"trump" => trump_counter
+		}
+
+
+
 		Rails.logger.info "Found this number of trumps: #{trump_counter}"
 		Rails.logger.info "Found this number of hillary: #{hillary_counter}"
 		Rails.logger.info "Found this number of bernie: #{bernie_counter}"
 		Rails.logger.info "Found this number of ted: #{ted_counter}"
 		Rails.logger.info "Found this number of kasich: #{kasich_counter}"
+
+		Rails.logger.info results.inspect
+
+		return results
 	end
 
 	# To remove any punctuations from a word
@@ -44,6 +60,11 @@ class AnalyzeArticle
 		word.chomp!(",")
 		word.chomp!("\"")	
 		word.downcase!
+	end
+
+	# this saves the data into mongo db
+	def save(results)
+		
 	end
 end
 

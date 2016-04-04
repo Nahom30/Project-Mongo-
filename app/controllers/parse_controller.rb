@@ -1,5 +1,10 @@
 class ParseController < ApplicationController
-	def index
-		AnalyzeArticle.new.start
+	def index	
 	end
+
+	def show
+		@results = AnalyzeArticle.new.start
+		AnalyzeArticle.new.save(@results)
+	end
+
 end
