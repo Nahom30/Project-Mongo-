@@ -40,8 +40,6 @@ class AnalyzeArticle
 			"trump" => trump_counter
 		}
 
-
-
 		Rails.logger.info "Found this number of trumps: #{trump_counter}"
 		Rails.logger.info "Found this number of hillary: #{hillary_counter}"
 		Rails.logger.info "Found this number of bernie: #{bernie_counter}"
@@ -64,7 +62,10 @@ class AnalyzeArticle
 
 	# this saves the data into mongo db
 	def save(results)
-		
+		results.each do |name, mentions|
+			candidate =  Candidate.find_or_create_by(name: name)
+			candidate.update_attribute(:mentions, candidate.mentions.to_i + mentions)
+		end		
 	end
 end
 

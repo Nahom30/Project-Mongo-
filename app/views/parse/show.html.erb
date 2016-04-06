@@ -9,10 +9,10 @@
 <th>Mentions</th>
 </tr>
 
-<% @results.each do |candidate,popularity| %>
+<% @results.each do |candidate| %>
 <tr>
-<td><%=candidate%></td>
-<td><%=popularity%></td>
+<td><%=candidate.name%></td>
+<td><%=candidate.mentions%></td>
 </tr>
 <% end %>
 
